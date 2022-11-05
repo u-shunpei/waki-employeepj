@@ -25,7 +25,7 @@
             <li class="header-nav-item">
                 <a href="#">{{ $user->name }}</a>
             <ul>
-                <li><a href="#">プロフィール</a></li>
+                <li><a href="{{ route('profile.edit', $user->id) }}">プロフィール</a></li>
                 <li><a href="#">ログアウト</a></li>
             </ul>
             </li>

@@ -16,37 +16,37 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::all();
         $departments = Department::all();
         $divisions = Division::all();
         $positions = Position::all();
         $birthmonths = Birthmonth::all();
         $bloods = Blood::all();
-        $user = Auth::user();
+        $us = Auth::user();
+        $users = User::all();
 
-        return view('employee.index', compact('employees', 'departments', 'divisions', 'positions', 'birthmonths', 'bloods', 'user'));
+        return view('employee.index', compact( 'departments', 'divisions', 'positions', 'birthmonths', 'bloods', 'us', 'users'));
     }
 
-    public function showDetailForm($employee_id)
+    public function showDetailForm($user_id)
     {
         //employee_idがnullだったらエラー表示
-        $employee = Employee::find($employee_id);
-        if (is_null($employee_id)) {
+        $user = User::find($user_id);
+        if (is_null($user_id)) {
             return 'エラー';
         }
-        return view('employee.detail', compact('employee'));
+        return view('employee.detail', compact('user'));
     }
 
-    public function search(Request $request)
-    {
-        $employees = Employee::searchEmployees($request->blood_id, $request->department_id, $request->division_id, $request->position_id, $request->birthmonth_id, $request->name);
-        $bloods = Blood::all();
-        $departments = Department::all();
-        $divisions = Division::all();
-        $positions = Position::all();
-        $birthmonths = Birthmonth::all();
-        $user = Auth::user();
-
-        return view('employee.index', compact('bloods', 'employees', 'departments', 'divisions', 'positions', 'birthmonths', 'user'));
-    }
+//    public function search(Request $request)
+//    {
+//        $employees = Employee::searchEmployees($request->blood_id, $request->department_id, $request->division_id, $request->position_id, $request->birthmonth_id, $request->name);
+//        $bloods = Blood::all();
+//        $departments = Department::all();
+//        $divisions = Division::all();
+//        $positions = Position::all();
+//        $birthmonths = Birthmonth::all();
+//        $user = Auth::user();
+//
+//        return view('employee.index', compact('bloods', 'employees', 'departments', 'divisions', 'positions', 'birthmonths', 'user'));
+//    }
 }
